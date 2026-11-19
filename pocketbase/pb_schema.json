@@ -1,5 +1,6 @@
 [
   {
+    "id": "pbc_projets",
     "name": "projets",
     "type": "base",
     "listRule": "",
@@ -8,39 +9,160 @@
     "updateRule": null,
     "deleteRule": null,
     "fields": [
-      { "name": "titre", "type": "text", "required": true },
-      { "name": "slug", "type": "text", "required": true, "pattern": "^[a-z0-9-]+$" },
-      { "name": "role", "type": "text" },
-      { "name": "categorie", "type": "select", "required": true, "maxSelect": 1, "values": ["Communication", "Design UX/UI", "Développement", "Projet perso"] },
-      { "name": "description", "type": "text" },
-      { "name": "image", "type": "file", "maxSelect": 1, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
-      { "name": "tags", "type": "json", "maxSize": 2000000 },
-      { "name": "mis_en_avant", "type": "bool" },
-      { "name": "ordre", "type": "number" },
-
-      { "name": "sous_titre", "type": "text" },
-      { "name": "accroche", "type": "json", "maxSize": 2000000 },
-      { "name": "problematique", "type": "text" },
-      { "name": "objectif", "type": "text" },
-      { "name": "contexte", "type": "json", "maxSize": 2000000 },
-      { "name": "fiche", "type": "json", "maxSize": 2000000 },
-      { "name": "image_principale", "type": "file", "maxSelect": 1, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
-      { "name": "intro_recherche", "type": "text" },
-      { "name": "etapes", "type": "json", "maxSize": 2000000 },
-      { "name": "realisations", "type": "json", "maxSize": 2000000 },
-      { "name": "galerie", "type": "json", "maxSize": 2000000 },
-      { "name": "images", "type": "file", "maxSelect": 20, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
-      { "name": "outils", "type": "json", "maxSize": 2000000 },
-      { "name": "chiffres", "type": "json", "maxSize": 2000000 },
-      { "name": "bilan", "type": "text" },
-      { "name": "liens", "type": "json", "maxSize": 2000000 },
-
-      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false },
-      { "name": "updated", "type": "autodate", "onCreate": true, "onUpdate": true }
+      {
+        "id": "text3208210256",
+        "name": "id",
+        "type": "text",
+        "system": true,
+        "primaryKey": true,
+        "required": true,
+        "autogeneratePattern": "[a-z0-9]{15}",
+        "pattern": "^[a-z0-9]+$",
+        "min": 15,
+        "max": 15
+      },
+      {
+        "name": "titre",
+        "type": "text",
+        "required": true,
+        "id": "champ_titre"
+      },
+      {
+        "name": "slug",
+        "type": "text",
+        "required": true,
+        "pattern": "^[a-z0-9-]+$",
+        "id": "champ_slug"
+      },
+      { "name": "role", "type": "text", "id": "champ_role" },
+      {
+        "name": "categorie",
+        "type": "select",
+        "required": true,
+        "maxSelect": 1,
+        "values": [
+          "Communication",
+          "Design UX/UI",
+          "Développement",
+          "Projet perso"
+        ],
+        "id": "champ_categorie"
+      },
+      { "name": "description", "type": "text", "id": "champ_description" },
+      {
+        "name": "image",
+        "type": "file",
+        "maxSelect": 1,
+        "maxSize": 5242880,
+        "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
+        "id": "champ_image"
+      },
+      {
+        "name": "tags",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_tags"
+      },
+      { "name": "mis_en_avant", "type": "bool", "id": "champ_mis_en_avant" },
+      { "name": "ordre", "type": "number", "id": "champ_ordre" },
+      { "name": "sous_titre", "type": "text", "id": "champ_sous_titre" },
+      {
+        "name": "accroche",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_accroche"
+      },
+      { "name": "problematique", "type": "text", "id": "champ_problematique" },
+      { "name": "objectif", "type": "text", "id": "champ_objectif" },
+      {
+        "name": "contexte",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_contexte"
+      },
+      {
+        "name": "fiche",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_fiche"
+      },
+      {
+        "name": "image_principale",
+        "type": "file",
+        "maxSelect": 1,
+        "maxSize": 5242880,
+        "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
+        "id": "champ_image_principale"
+      },
+      {
+        "name": "intro_recherche",
+        "type": "text",
+        "id": "champ_intro_recherche"
+      },
+      {
+        "name": "etapes",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_etapes"
+      },
+      {
+        "name": "realisations",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_realisations"
+      },
+      {
+        "name": "galerie",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_galerie"
+      },
+      {
+        "name": "images",
+        "type": "file",
+        "maxSelect": 20,
+        "maxSize": 5242880,
+        "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
+        "id": "champ_images"
+      },
+      {
+        "name": "outils",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_outils"
+      },
+      {
+        "name": "chiffres",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_chiffres"
+      },
+      { "name": "bilan", "type": "text", "id": "champ_bilan" },
+      {
+        "name": "liens",
+        "type": "json",
+        "maxSize": 2000000,
+        "id": "champ_liens"
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": false,
+        "id": "champ_created"
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true,
+        "id": "champ_updated"
+      }
     ],
     "indexes": ["CREATE UNIQUE INDEX idx_projets_slug ON projets (slug)"]
   },
   {
+    "id": "pbc_messages",
     "name": "messages",
     "type": "base",
     "listRule": null,
@@ -49,10 +171,38 @@
     "updateRule": null,
     "deleteRule": null,
     "fields": [
-      { "name": "nom", "type": "text", "required": true },
-      { "name": "email", "type": "email", "required": true },
-      { "name": "message", "type": "text", "required": true },
-      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false }
+      {
+        "id": "text3208210256",
+        "name": "id",
+        "type": "text",
+        "system": true,
+        "primaryKey": true,
+        "required": true,
+        "autogeneratePattern": "[a-z0-9]{15}",
+        "pattern": "^[a-z0-9]+$",
+        "min": 15,
+        "max": 15
+      },
+      { "name": "nom", "type": "text", "required": true, "id": "champ_nom" },
+      {
+        "name": "email",
+        "type": "email",
+        "required": true,
+        "id": "champ_email"
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "required": true,
+        "id": "champ_message"
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": false,
+        "id": "champ_created"
+      }
     ],
     "indexes": []
   }
