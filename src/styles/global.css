@@ -586,3 +586,29 @@ body {
   text-decoration: underline;
   text-underline-offset: 6px;
 }
+
+/* =====================================================
+   CORRECTIFS MOBILE
+   Évitent que la page déborde sur la droite du téléphone
+   ===================================================== */
+/* 1. Une colonne de grille ne doit jamais devenir plus large que l'écran.
+      Sans ça, un long mot (ex : « Notre-Dame ») élargit toute la colonne,
+      et l'image encadrée posée dans la même colonne grandit avec elle. */
+.grid > * {
+  min-width: 0;
+}
+/* 2. Une image ne dépasse jamais de son cadre */
+.cadre-photo img {
+  max-width: 100%;
+}
+/* 3. Un titre trop long pour l'écran passe à la ligne (avec un tiret) au lieu de dépasser */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+/* 4. Filet de sécurité : jamais de défilement horizontal sur la page */
+body {
+  overflow-x: clip;
+}
