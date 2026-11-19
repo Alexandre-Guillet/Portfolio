@@ -1,0 +1,18 @@
+---
+// =====================================================
+// FICHE CHIFFRÉE : remplace une image quand une étape n'a pas de visuel
+// chiffres = [{ valeur: 'RGAA 4.1', legende: '...' }, ...]
+// =====================================================
+import Coins from './Coins.astro'
+const { chiffres = [] } = Astro.props
+---
+<div class="relative bg-sable border border-or flex flex-col items-center justify-center gap-3 text-center p-10 min-h-80">
+  <Coins petit />
+  {chiffres.map((c, i) => (
+    <>
+      {i > 0 && <div class="ornement-petit"><span></span></div>}
+      <p class="font-titre font-bold text-4xl text-ocre">{c.valeur}</p>
+      <p class="italic text-brun">{c.legende}</p>
+    </>
+  ))}
+</div>

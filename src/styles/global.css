@@ -1,0 +1,588 @@
+/* =====================================================
+   FEUILLE DE STYLE PRINCIPALE
+   - Tailwind CSS v4 : classes utilitaires (ex : text-center, p-4)
+   - DaisyUI v5 : composants tout prêts (btn, input, badge…)
+   - En bas : nos styles perso (ornements, cartes, héros…)
+   ===================================================== */
+
+@import "tailwindcss";
+
+/* --- DaisyUI : on active le plugin sans les thèmes par défaut --- */
+@plugin "daisyui" {
+  themes: false;
+}
+
+/* =====================================================
+   THÈME DAISYUI « PARCHEMIN »
+   Les couleurs du guide de style (tons café / parchemin)
+   ===================================================== */
+@plugin "daisyui/theme" {
+  name: "parchemin";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #f4efe6; /* fond parchemin */
+  --color-base-200: #e8dfc9; /* fond sable (sections alternées) */
+  --color-base-300: #e3cfbd; /* beige (tags) */
+  --color-base-content: #2f251e; /* texte principal (encre) */
+
+  --color-primary: #5c3d1e; /* brun : boutons */
+  --color-primary-content: #f4efe6;
+  --color-secondary: #9d6c1e; /* ocre : mots en valeur */
+  --color-secondary-content: #f4efe6;
+  --color-accent: #b7883d; /* or : filets, contours */
+  --color-accent-content: #2f251e;
+  --color-neutral: #2c1810; /* brun nuit : footer */
+  --color-neutral-content: #f4efe6;
+
+  --color-info: #5c7a8c;
+  --color-info-content: #f4efe6;
+  --color-success: #5e7a3a;
+  --color-success-content: #f4efe6;
+  --color-warning: #b7883d;
+  --color-warning-content: #2f251e;
+  --color-error: #8e3b2e;
+  --color-error-content: #f4efe6;
+
+  /* Angles droits = plus « médiéval » que des boutons arrondis */
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* =====================================================
+   VARIABLES TAILWIND : polices et couleurs perso
+   Exemple d'utilisation : class="font-titre text-ocre bg-sable"
+   ===================================================== */
+@theme {
+  --font-titre: "Cinzel", serif; /* titres, logo */
+  --font-texte: "Crimson Text", Georgia, serif; /* paragraphes */
+  --font-deco: "Cinzel Decorative", serif; /* lettrines, sceaux */
+
+  --color-encre: #2f251e;
+  --color-parchemin: #f4efe6;
+  --color-sable: #e8dfc9;
+  --color-beige: #e3cfbd;
+  --color-or: #b7883d;
+  --color-or-fonce: #8b6914;
+  --color-ocre: #9d6c1e;
+  --color-brun: #5c3d1e;
+  --color-taupe: #886849;
+  --color-nuit: #2c1810;
+  --color-gris-chaud: #b19881;
+}
+
+/* =====================================================
+   BASE : styles appliqués à toute la page
+   ===================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-texte);
+  font-size: 1.25rem; /* 20 px : confortable pour du Crimson Text */
+  line-height: 1.5;
+  color: var(--color-encre);
+  background: var(--color-parchemin);
+}
+
+/* Lien d'évitement (accessibilité RGAA) : visible seulement au clavier */
+.lien-evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--color-brun);
+  color: var(--color-parchemin);
+}
+.lien-evitement:focus {
+  left: 0.5rem;
+}
+
+/* =====================================================
+   TITRES DE SECTION (H2)
+   Premier mot en ocre grâce à un <span class="mot-or">
+   ===================================================== */
+.titre-section {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: clamp(
+    2rem,
+    5vw,
+    4rem
+  ); /* 32 px sur mobile → 64 px sur grand écran */
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+}
+.mot-or {
+  color: var(--color-ocre);
+}
+
+.sous-titre {
+  font-style: italic;
+  color: var(--color-brun);
+  text-align: center;
+  letter-spacing: 0.02em;
+  font-size: 1.4rem;
+}
+
+/* =====================================================
+   ORNEMENT DE SECTION
+   Chiffre romain + filets effilés + rinceaux + libellé
+   ===================================================== */
+.ornement-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+.ornement-numero {
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-taupe);
+  letter-spacing: 0.08em;
+}
+.ornement-ligne {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.ornement-ligne .filet {
+  flex: 1; /* les filets prennent toute la place disponible */
+  height: 12px;
+  min-width: 20px;
+}
+.ornement-ligne .rinceau {
+  width: 140px;
+  height: 32px;
+}
+.ornement-ligne .fleur {
+  width: 30px;
+  height: 30px;
+}
+.ornement-libelle {
+  font-style: italic;
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  padding: 0 0.5rem;
+  white-space: nowrap;
+}
+/* Sur mobile, on réduit les rinceaux */
+@media (max-width: 640px) {
+  .ornement-ligne .rinceau {
+    width: 77px;
+    height: 18px;
+  }
+  .ornement-libelle {
+    font-size: 1.1rem;
+  }
+  .ornement-numero {
+    font-size: 2rem;
+  }
+}
+
+/* =====================================================
+   CADRE ENLUMINÉ : double filet doré + losanges dans les coins
+   Utilisé autour des sections importantes
+   ===================================================== */
+.cadre-enlumine {
+  position: relative;
+  border: 1px solid var(--color-or);
+  padding: 8px;
+}
+.cadre-enlumine > .cadre-interieur {
+  border: 1px solid color-mix(in srgb, var(--color-or) 55%, transparent);
+}
+/* Les 4 losanges des coins sont des <span class="coin"> */
+.coin {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: url("/ornements/losange.svg") no-repeat center / contain;
+}
+.coin-hg {
+  top: -7px;
+  left: -7px;
+}
+.coin-hd {
+  top: -7px;
+  right: -7px;
+}
+.coin-bg {
+  bottom: -7px;
+  left: -7px;
+}
+.coin-bd {
+  bottom: -7px;
+  right: -7px;
+}
+.coin.petit {
+  width: 10px;
+  height: 10px;
+}
+.coin.petit.coin-hg {
+  top: -5px;
+  left: -5px;
+}
+.coin.petit.coin-hd {
+  top: -5px;
+  right: -5px;
+}
+.coin.petit.coin-bg {
+  bottom: -5px;
+  left: -5px;
+}
+.coin.petit.coin-bd {
+  bottom: -5px;
+  right: -5px;
+}
+
+/* =====================================================
+   CARTE PROJET
+   Toutes les cartes ont la même structure et la même hauteur
+   ===================================================== */
+.carte-projet {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-parchemin);
+  border: 1px solid var(--color-or-fonce);
+  padding: 8px;
+  box-shadow: 0 8px 20px rgb(47 37 30 / 0.14);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+/* Carte cachée par un filtre (attribut hidden) */
+.carte-projet[hidden] {
+  display: none;
+}
+.carte-projet:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgb(47 37 30 / 0.2);
+}
+.carte-projet .cadre {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid var(--color-or);
+}
+.carte-projet .visuel {
+  position: relative;
+  aspect-ratio: 364 / 470; /* visuel portrait, comme dans la maquette */
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-or);
+  background: var(--color-taupe);
+}
+.carte-projet .visuel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FILTRE SÉPIA : garde les visuels colorés dans l'univers café.
+   Au survol de la carte, l'image retrouve ses couleurs d'origine. */
+.filtre-sepia {
+  filter: sepia(0.45) saturate(0.7) contrast(0.95);
+  transition: filter 0.4s;
+}
+.carte-projet:hover .filtre-sepia {
+  filter: none;
+}
+
+/* Bandeau catégorie posé sur l'image */
+.bandeau-categorie {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1.1rem;
+  background: var(--color-brun);
+  border: 1px solid var(--color-or);
+  color: var(--color-parchemin);
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+/* Petits losanges dorés de chaque côté du texte (un carré tourné de 45°) */
+.bandeau-categorie::before,
+.bandeau-categorie::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--color-or);
+  transform: rotate(45deg);
+}
+
+/* Textes de la carte : hauteurs fixes pour aligner toutes les cartes */
+.carte-projet .titre {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-align: center;
+  min-height: 2.4em; /* 2 lignes réservées */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.carte-projet .description {
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  display: -webkit-box; /* coupe la description après 4 lignes avec « … » */
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 5.4em;
+}
+
+/* Petit ornement trait – losange – trait */
+.ornement-petit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.ornement-petit::before,
+.ornement-petit::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--color-or);
+}
+.ornement-petit span {
+  width: 8px;
+  height: 8px;
+  background: url("/ornements/losange.svg") no-repeat center / contain;
+}
+
+/* Tag (étiquette) */
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  background: var(--color-beige);
+  border: 1px solid var(--color-or);
+  color: var(--color-brun);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   SCEAUX (losange ou rond avec une lettre)
+   ===================================================== */
+.sceau-losange {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+.sceau-losange::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  background: var(--color-brun);
+  transform: rotate(45deg);
+  outline: 1px solid var(--color-or);
+  outline-offset: -5px;
+}
+.sceau-losange span {
+  position: relative;
+  font-family: var(--font-deco);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-parchemin);
+}
+.sceau-rond {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-brun);
+  border: 2px solid var(--color-or);
+  box-shadow:
+    inset 0 0 0 4px var(--color-brun),
+    inset 0 0 0 5px color-mix(in srgb, var(--color-or) 70%, transparent);
+  /* Cinzel (et non Cinzel Decorative) : majuscules droites et régulières */
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--color-parchemin);
+  /* Centre la lettre sur sa hauteur réelle (sans l'espace au-dessus et en dessous) */
+  text-box: trim-both cap alphabetic;
+}
+
+/* =====================================================
+   HÉROS (haut de page) + NUAGES ANIMÉS
+   ===================================================== */
+.heros {
+  position: relative;
+  overflow: hidden;
+  background: #f0ece3;
+}
+/* Bande de nuages (5 nuages de la maquette) qui défile vers la gauche en boucle.
+   La piste contient 2 copies identiques : quand la 1re est sortie, on revient au début
+   sans que ça se voie. */
+.nuages {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 6rem;
+  aspect-ratio: 1920 / 476; /* mêmes proportions que dans Figma */
+  pointer-events: none; /* on peut cliquer à travers les nuages */
+}
+@media (min-width: 768px) {
+  .nuages {
+    top: 167px;
+  }
+}
+.nuages-piste {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: defile-nuages 40s linear infinite;
+}
+.nuages-copie {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+.nuages-copie img {
+  position: absolute;
+  height: auto;
+}
+@keyframes defile-nuages {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Si l'utilisateur préfère moins d'animations (accessibilité) */
+@media (prefers-reduced-motion: reduce) {
+  .nuages-piste {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.heros-titre {
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+/* Trois bandes de couleur sous le héros */
+.transition-heros div:nth-child(1) {
+  height: 14px;
+  background: #e3cfbd;
+}
+.transition-heros div:nth-child(2) {
+  height: 14px;
+  background: #b19881;
+}
+.transition-heros div:nth-child(3) {
+  height: 26px;
+  background: #886849;
+}
+
+/* Doubles traits sous le titre du héros */
+.double-trait {
+  border-top: 1px solid var(--color-gris-chaud);
+  border-bottom: 1px solid var(--color-gris-chaud);
+  height: 6px;
+}
+
+/* =====================================================
+   CADRE PHOTO (double contour)
+   ===================================================== */
+.cadre-photo {
+  position: relative;
+  background: var(--color-beige);
+  border: 1px solid var(--color-or);
+  padding: 8px;
+}
+.cadre-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =====================================================
+   FORMULAIRE DE CONTACT : champs soulignés
+   ===================================================== */
+.champ-souligne {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-or);
+  border-radius: 0;
+  padding-left: 0;
+  font-style: italic;
+}
+.champ-souligne:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-brun);
+}
+
+/* =====================================================
+   FOOTER : titres des colonnes (losange + texte doré + soulignement)
+   ===================================================== */
+.titre-colonne {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: var(--color-or);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.1rem;
+  background: linear-gradient(var(--color-or), var(--color-or)) left bottom /
+    48px 1px no-repeat;
+}
+.titre-colonne::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--color-or);
+  transform: rotate(45deg);
+}
+
+/* =====================================================
+   NAVIGATION : lien de la page en cours
+   ===================================================== */
+.lien-nav[aria-current="page"] {
+  color: var(--color-ocre);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}

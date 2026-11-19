@@ -1,0 +1,11 @@
+---
+// TUILE OUTIL : sceau rond avec une initiale + nom + catégorie
+const { initiale, nom, categorie } = Astro.props
+---
+<li class="bg-parchemin border border-or-fonce p-1.5 shadow-lg">
+  <div class="border border-or h-full flex flex-col items-center justify-center text-center gap-2.5 px-3 py-6">
+    <span class="sceau-rond">{initiale}</span>
+    <span class="font-titre font-bold text-lg tracking-wide">{nom}</span>
+    <span class="italic text-ocre text-base">{categorie}</span>
+  </div>
+</li>

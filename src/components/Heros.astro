@@ -1,0 +1,54 @@
+---
+// =====================================================
+// HÉROS (haut de page) : nuages animés + titre sur deux lignes + bouton
+// Utilisation : <Heros ligne1="MES" ligne2="PROJETS" sousTitre="..." />
+// =====================================================
+import OrnementLigne from './OrnementLigne.astro'
+const { ligne1, ligne2, sousTitre } = Astro.props
+
+// NUAGES : les 5 nuages de la maquette Figma (position et largeur en % de la bande)
+const nuages = [
+  { src: 'nuage-3', left: 0, top: 3.2, width: 25.8 },
+  { src: 'nuage-2', left: 10.8, top: 71.8, width: 12.7 },
+  { src: 'nuage-5', left: 55.7, top: 58.8, width: 16.4 },
+  { src: 'nuage-1', left: 69.4, top: 0, width: 25.8 },
+  { src: 'nuage-4', left: 83.2, top: 81.7, width: 16.8 },
+]
+---
+<section class="heros">
+  <!-- NUAGES ANIMÉS : la bande est en double pour défiler en boucle sans coupure -->
+  <div class="nuages" aria-hidden="true">
+    <div class="nuages-piste">
+      {[1, 2].map(() => (
+        <div class="nuages-copie">
+          {nuages.map((n) => (
+            <img src={`/images/nuages/${n.src}.webp`} alt="" style={`left:${n.left}%;top:${n.top}%;width:${n.width}%`}>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-5 pt-10 pb-12 flex flex-col items-center text-center">
+    <OrnementLigne />
+
+    <!-- Titre principal sur deux lignes -->
+    <h1 class="heros-titre mt-16 md:mt-24 w-full">
+      <span class="block text-4xl md:text-7xl lg:text-8xl text-encre md:text-left md:pl-16">{ligne1}</span>
+      <span class="block text-5xl md:text-8xl lg:text-9xl text-or-fonce mt-2">{ligne2}</span>
+    </h1>
+
+    <div class="double-trait w-full max-w-5xl mt-12 md:mt-16"></div>
+    <p class="italic text-xl md:text-2xl tracking-[0.08em] mt-6 max-w-3xl" set:html={sousTitre}></p>
+    <a href="#contenu" class="btn btn-primary border-ocre font-texte font-bold text-lg tracking-[0.1em] mt-8 px-9">DÉCOUVRIR</a>
+
+    <!-- Indication de défilement -->
+    <div class="flex flex-col items-center mt-8 text-xs tracking-[0.3em]" aria-hidden="true">
+      SCROLL
+      <svg width="20" height="17" viewBox="0 0 20 17"><path d="M1 1l9 14 9-14" fill="none" stroke="#2F251E" /></svg>
+    </div>
+  </div>
+
+  <!-- Trois bandes de couleur qui font la transition avec le contenu -->
+  <div class="transition-heros" aria-hidden="true"><div></div><div></div><div></div></div>
+</section>

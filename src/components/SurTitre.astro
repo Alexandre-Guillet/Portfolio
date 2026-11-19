@@ -1,0 +1,7 @@
+---
+// SUR-TITRE : petit losange + texte doré en capitales (ex : « LE POINT DE DÉPART »)
+const { texte } = Astro.props
+---
+<p class="flex items-center gap-2.5 font-titre font-bold text-sm tracking-[0.16em] text-or uppercase">
+  <img src="/ornements/losange.svg" alt="" class="w-2 h-2">{texte}
+</p>

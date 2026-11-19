@@ -1,0 +1,173 @@
+---
+// =====================================================
+// PAGE DÉTAIL D'UN PROJET  →  /projets/red-panda-studio/
+// Astro crée une page pour chaque projet de PocketBase (getStaticPaths).
+// Sections : Le but · Recherche · Réalisation · Outils · Bilan · Navigation
+// =====================================================
+import Layout from '../../layouts/Layout.astro'
+import Heros from '../../components/Heros.astro'
+import OrnementSection from '../../components/OrnementSection.astro'
+import TitreSection from '../../components/TitreSection.astro'
+import BlocTexte from '../../components/BlocTexte.astro'
+import SurTitre from '../../components/SurTitre.astro'
+import ImageEncadree from '../../components/ImageEncadree.astro'
+import FicheChiffree from '../../components/FicheChiffree.astro'
+import CarteEtape from '../../components/CarteEtape.astro'
+import TuileOutil from '../../components/TuileOutil.astro'
+import Coins from '../../components/Coins.astro'
+import { recupererProjets, aUnePageDetaillee } from '../../lib/pocketbase.js'
+
+// --- Une page par projet ---
+export async function getStaticPaths() {
+  const projets = await recupererProjets()
+  const detailles = projets.filter(aUnePageDetaillee)
+
+  return projets.map((projet) => {
+    // Projet précédent / suivant (seulement parmi les projets détaillés)
+    const i = detailles.findIndex((p) => p.slug === projet.slug)
+    const precedent = i >= 0 ? detailles[(i - 1 + detailles.length) % detailles.length] : null
+    const suivant = i >= 0 ? detailles[(i + 1) % detailles.length] : null
+    return { params: { slug: projet.slug }, props: { projet, precedent, suivant } }
+  })
+}
+
+const { projet, precedent, suivant } = Astro.props
+const detaille = aUnePageDetaillee(projet)
+const romains = ['I', 'II', 'III', 'IV', 'V']
+---
+<Layout titre={`${projet.titre} — Alexandre Guillet`} description={projet.description}>
+  <Heros ligne1="PROJET" ligne2={projet.titre.toUpperCase()} sousTitre={projet.sous_titre || projet.role} />
+
+  <main id="contenu">
+    {detaille ? (
+      <>
+        {/* ================= I : LE BUT ================= */}
+        <section class="bg-parchemin py-24 px-5">
+          <OrnementSection numero="I" libelle="Le but" />
+          <TitreSection motOr={projet.accroche[0]} suite={projet.accroche[1]} />
+          <div class="max-w-6xl mx-auto mt-16 grid lg:grid-cols-[1fr_380px] gap-16 items-center">
+            <div class="flex flex-col gap-10">
+              <BlocTexte surtitre="Le point de départ" titre="Problématique" texte={projet.problematique} />
+              <BlocTexte surtitre="La mission" titre="Objectif" texte={projet.objectif} />
+              {projet.contexte && <BlocTexte surtitre={projet.contexte.surtitre} titre={projet.contexte.titre} texte={projet.contexte.texte} />}
+              {/* Fiche du projet : type, année, équipe, rôle */}
+              <ul class="flex flex-wrap gap-3.5">
+                {(projet.fiche || []).map((f) => (
+                  <li class="bg-sable border border-or px-4 py-2.5">
+                    <span class="block font-titre font-bold text-xs tracking-[0.14em] text-ocre uppercase">{f.label}</span>
+                    <span class="font-semibold text-lg">{f.valeur}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ImageEncadree src={projet.image_principale} alt={`Visuel principal du projet ${projet.titre}`} format="aspect-[380/620] [&_img]:object-contain" />
+          </div>
+        </section>
+
+        {/* ================= II : RECHERCHE & PRÉPARATION ================= */}
+        <section class="bg-sable py-24 px-5">
+          <OrnementSection numero="II" libelle="Avant" />
+          <TitreSection motOr="Recherche" suite=" & préparation" />
+          <p class="max-w-3xl mx-auto text-center mt-6">{projet.intro_recherche}</p>
+          <div class="max-w-6xl mx-auto mt-14 grid md:grid-cols-3 gap-9">
+            {projet.etapes.map((e, i) => <CarteEtape numero={romains[i]} titre={e.titre} origine={`Étape ${i + 1}`} texte={e.texte} />)}
+          </div>
+        </section>
+
+        {/* ================= III : CONCEPTION & RÉALISATION ================= */}
+        <section class="bg-parchemin py-24 px-5">
+          <OrnementSection numero="III" libelle="Réalisation" />
+          <TitreSection motOr="Conception" suite=" & réalisation" />
+          <div class="max-w-6xl mx-auto mt-16 flex flex-col gap-24">
+            {(projet.realisations || []).map((r, i) => (
+              <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                {/* Une ligne sur deux, le visuel passe à droite */}
+                <div class={i % 2 ? 'lg:order-last' : ''}>
+                  {r.chiffres
+                    ? <FicheChiffree chiffres={r.chiffres} />
+                    : <ImageEncadree src={r.image} alt={r.titre} legende={r.legende} format="aspect-[10/7] [&_img]:object-top" />}
+                </div>
+                <BlocTexte surtitre={`Étape ${romains[i]}`} titre={r.titre} texte={r.texte} />
+              </div>
+            ))}
+          </div>
+
+          {projet.galerie && projet.galerie.length > 0 && (
+            <div class="max-w-6xl mx-auto mt-24">
+              <h3 class="font-titre font-bold text-2xl text-center tracking-widest mb-10"><span class="text-ocre">E</span>n images</h3>
+              <div class="grid md:grid-cols-2 gap-10">
+                {projet.galerie.map((g) => <ImageEncadree src={g.image} alt={g.legende} legende={g.legende} format="aspect-[16/10] [&_img]:object-contain" />)}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* ================= IV : TECHNOLOGIES & OUTILS ================= */}
+        <section class="bg-sable py-24 px-5">
+          <OrnementSection numero="IV" libelle="Outils" />
+          <TitreSection motOr="Technologies" suite=" & outils" />
+          <ul class="max-w-5xl mx-auto mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+            {(projet.outils || []).map((o) => <TuileOutil {...o} />)}
+          </ul>
+        </section>
+
+        {/* ================= V : RÉSULTATS & BILAN ================= */}
+        <section class="bg-parchemin py-24 px-5">
+          <OrnementSection numero="V" libelle="Bilan" />
+          <TitreSection motOr="Résultats" suite=" & bilan" />
+          <ul class="max-w-5xl mx-auto mt-16 grid md:grid-cols-3 gap-9">
+            {(projet.chiffres || []).map((c) => (
+              <li class="relative bg-sable border border-or flex flex-col items-center text-center gap-1.5 px-5 py-8">
+                <Coins petit />
+                <span class="font-titre font-bold text-4xl text-ocre">{c.valeur}</span>
+                <span class="italic text-brun">{c.legende}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="max-w-3xl mx-auto mt-16 text-center flex flex-col items-center gap-3">
+            <SurTitre texte="Ce que j'en retiens" />
+            <h3 class="font-titre font-bold text-3xl"><span class="text-ocre">B</span>ilan personnel</h3>
+            <p>{projet.bilan}</p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-5 mt-12">
+            {(projet.liens || []).map((l, i) => (
+              <a href={l.url} target="_blank" rel="noopener"
+                 class:list={['btn font-texte font-bold text-lg tracking-widest uppercase', i === 0 ? 'btn-primary' : 'btn-outline border-brun text-brun']}>{l.texte}</a>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= NAVIGATION ENTRE LES PROJETS ================= */}
+        {precedent && suivant && (
+          <nav class="bg-sable border-t border-or/60 py-11 px-5" aria-label="Navigation entre les projets">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+              <a href={`/projets/${precedent.slug}/`} class="text-center md:text-left">
+                <span class="block font-titre font-bold text-sm tracking-[0.14em] text-or">← PROJET PRÉCÉDENT</span>
+                <span class="font-titre font-bold text-2xl">{precedent.titre}</span>
+              </a>
+              <a href="/projets/" class="btn btn-outline border-brun text-brun font-texte font-bold tracking-widest">TOUS MES PROJETS</a>
+              <a href={`/projets/${suivant.slug}/`} class="text-center md:text-right">
+                <span class="block font-titre font-bold text-sm tracking-[0.14em] text-or">PROJET SUIVANT →</span>
+                <span class="font-titre font-bold text-2xl">{suivant.titre}</span>
+              </a>
+            </div>
+          </nav>
+        )}
+      </>
+    ) : (
+      {/* PROJET SANS PAGE DÉTAILLÉE : visuel + description */}
+      <section class="bg-parchemin py-24 px-5">
+        <OrnementSection numero="I" libelle="Le projet" />
+        <div class="max-w-5xl mx-auto mt-16 grid md:grid-cols-[340px_1fr] gap-14 items-center">
+          <ImageEncadree src={projet.image} alt={`Visuel du projet ${projet.titre}`} />
+          <div class="flex flex-col gap-4">
+            <p class="italic text-ocre">{projet.role}</p>
+            <p>{projet.description}</p>
+            <p class="italic text-taupe">La page détaillée de ce projet arrive bientôt.</p>
+            <a href="/projets/" class="btn btn-primary self-start font-texte font-bold tracking-widest">TOUS MES PROJETS</a>
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>

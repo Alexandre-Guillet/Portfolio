@@ -1,0 +1,13 @@
+---
+// PAGE 404 : affichée quand une adresse n'existe pas
+import Layout from '../layouts/Layout.astro'
+import OrnementSection from '../components/OrnementSection.astro'
+import TitreSection from '../components/TitreSection.astro'
+---
+<Layout titre="Page introuvable — Alexandre Guillet" description="Cette page n'existe pas.">
+  <main id="contenu" class="bg-parchemin py-32 px-5 text-center">
+    <OrnementSection numero="404" libelle="Égaré" />
+    <TitreSection motOr="Page" suite=" introuvable" sousTitre="Ce parchemin semble s'être perdu en chemin…" />
+    <a href="/" class="btn btn-primary border-ocre font-texte font-bold text-lg tracking-[0.1em] px-9 mt-10">RETOUR À L'ACCUEIL</a>
+  </main>
+</Layout>

@@ -1,0 +1,140 @@
+---
+// =====================================================
+// PAGE À PROPOS
+// Parcours + Notre-Dame · Outils · Passions · Plus-value
+// =====================================================
+import Layout from '../layouts/Layout.astro'
+import Heros from '../components/Heros.astro'
+import OrnementSection from '../components/OrnementSection.astro'
+import TitreSection from '../components/TitreSection.astro'
+import Coins from '../components/Coins.astro'
+import ImageEncadree from '../components/ImageEncadree.astro'
+import SurTitre from '../components/SurTitre.astro'
+import TuileOutil from '../components/TuileOutil.astro'
+import CarteEtape from '../components/CarteEtape.astro'
+
+// MES OUTILS
+const outils = [
+  { initiale: 'F', nom: 'Figma', categorie: 'Design UI/UX' },
+  { initiale: 'A', nom: 'Affinity', categorie: 'Création graphique' },
+  { initiale: 'H', nom: 'HTML / CSS', categorie: 'Intégration web' },
+  { initiale: 'V', nom: 'VS Code', categorie: 'Développement' },
+  { initiale: 'G', nom: 'Git', categorie: 'Versionnage' },
+  { initiale: 'P', nom: 'Gestion de projet', categorie: 'Organisation' },
+  { initiale: 'D', nom: 'Direction artistique', categorie: 'Identité visuelle' },
+]
+
+// PLUS-VALUE : ce que j'apporte sur un projet
+const plusValues = [
+  { numero: 'I', titre: 'Empathie & UX', origine: 'Issu du Jeu de Rôle', texte: "La pratique du jeu de rôle m'a habitué à me mettre à la place de profils très différents du mien. Ça m'aide à comprendre les besoins réels des utilisateurs et à concevoir des parcours fluides et intuitifs." },
+  { numero: 'II', titre: "Écoute active & travail d'équipe", origine: 'Issu de la Musique', texte: "À la basse, mon rôle est de faire le lien entre le rythme et la mélodie. Cette sensibilité m'apprend à être à l'écoute de mes coéquipiers, à trouver le bon tempo en groupe et à faire dialoguer les différents profils." },
+  { numero: 'III', titre: 'Problèmes & adaptabilité', origine: 'Issu du Live & des Scénarios', texte: "Animer du JDR ou jouer de la basse en live m'a appris à garder mon sang-froid, à réagir vite face aux imprévus et à réadapter la trajectoire en temps réel sans bloquer l'avancée du projet." },
+  { numero: 'IV', titre: 'Animation de groupe', origine: "Issu de l'Association", texte: "Mener des sessions de jeu et présider une association m'a formé à capter l'attention, synthétiser les échanges et donner la parole à chacun pour faire avancer le groupe vers une histoire, un projet commun." },
+]
+
+// Petites infos du bloc Notre-Dame
+const reperes = [
+  { label: 'Durée', valeur: '1 semaine' },
+  { label: 'Service', valeur: 'Communication' },
+  { label: 'Lieu', valeur: 'Paris (75)' },
+]
+---
+<Layout titre="À propos — Alexandre Guillet" description="Mon parcours, mes outils, mes passions et ce que j'apporte sur un projet.">
+  <Heros ligne1="ALEXANDRE" ligne2="GUILLET" sousTitre="À propos de moi et de mon parcours, mes expériences et mes motivations" />
+
+  <main id="contenu">
+    <!-- ================= SECTION I : MON PARCOURS ================= -->
+    <section class="bg-parchemin py-24 px-5">
+      <OrnementSection numero="I" libelle="Moi" />
+      <TitreSection motOr="Mon" suite=" parcours" />
+
+      <div class="max-w-6xl mx-auto mt-16 grid md:grid-cols-[310px_1fr] gap-12 md:gap-24 items-center">
+        <div class="cadre-photo w-64 md:w-full mx-auto aspect-[310/435]">
+          <Coins petit />
+          <img src="/images/portrait.webp" alt="Portrait d'Alexandre Guillet">
+        </div>
+        <!-- Texte du parcours : aligné à gauche (jamais justifié) -->
+        <div class="flex flex-col gap-5">
+          <p>À la base, je ne me destinais pas du tout au web ou au design : après le bac, je suis parti en fac de sciences (SVT et chimie). Même si ça m'a donné de bonnes méthodes et un esprit curieux, j'ai vite compris que passer mes journées dans la théorie pure, ce n'était pas trop mon truc. Ce qu'il me fallait, c'était du concret et du projet.</p>
+          <p>Le vrai déclic est venu un peu plus tard. J'ai d'abord fait un <strong class="text-ocre">stage d'un mois au service communication de la mairie de Meung-sur-Loire</strong>. Dans la foulée, j'ai eu l'opportunité de passer une semaine dans le service communication du chantier de reconstruction de <strong class="text-ocre">Notre-Dame de Paris</strong>. Voir comment des équipes aussi différentes communiquent et travaillent sur des projets, même à des échelles différentes, ça m'a marqué.</p>
+          <p>C'est à ce moment-là que j'ai compris que la com' et le design d'expérience étaient des domaines où je pouvais m'épanouir. J'ai donc rejoint le <strong class="text-ocre">BUT MMI</strong> pour apprendre le métier, être polyvalent et me former sur des projets réels.</p>
+        </div>
+      </div>
+
+      <!-- ===== MOMENT CLÉ : Notre-Dame de Paris ===== -->
+      <div class="max-w-6xl mx-auto mt-24 bg-parchemin border border-or-fonce p-2.5 shadow-xl">
+        <div class="relative border border-or p-6 md:p-14 grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-center">
+          <Coins petit />
+          <ImageEncadree src="/images/notre-dame.webp" alt="La cathédrale Notre-Dame de Paris" legende="Cathédrale Notre-Dame de Paris" format="aspect-[4/3]" sepia />
+          <div class="flex flex-col gap-4">
+            <SurTitre texte="Moment clé de mon parcours" />
+            <h3 class="font-titre font-bold text-4xl md:text-5xl tracking-wide"><span class="text-ocre">N</span>otre-Dame de Paris</h3>
+            <p class="italic text-ocre text-2xl">Une semaine au service communication du chantier de reconstruction</p>
+            <div class="ornement-petit justify-start"><span></span></div>
+            <p>Juste après mon stage à la mairie de Meung-sur-Loire, j'ai passé une semaine en immersion au sein du service communication du chantier de reconstruction de Notre-Dame de Paris. Découvrir de l'intérieur la communication d'un chantier suivi dans le monde entier, et voir comment des équipes très différentes travaillent ensemble, a été le vrai déclic : c'est là que j'ai su que je voulais faire de la communication et du design mon métier.</p>
+            <ul class="flex flex-wrap gap-4 mt-2">
+              {reperes.map((r) => (
+                <li class="bg-sable border border-or px-5 py-3">
+                  <span class="block font-titre font-bold text-xs tracking-[0.14em] text-ocre uppercase">{r.label}</span>
+                  <span class="font-semibold">{r.valeur}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION II : MES OUTILS ================= -->
+    <section class="bg-sable py-24 px-5">
+      <OrnementSection numero="II" libelle="Outils" />
+      <TitreSection motOr="Mes" suite=" outils" sousTitre="Les logiciels et savoir-faire que j'utilise au quotidien" />
+      <ul class="max-w-6xl mx-auto mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6">
+        {outils.map((o) => <TuileOutil {...o} />)}
+      </ul>
+    </section>
+
+    <!-- ================= SECTION III : MES PASSIONS ================= -->
+    <section class="bg-parchemin py-24 px-5">
+      <OrnementSection numero="III" libelle="Passion" />
+      <TitreSection motOr="Mes" suite=" passions" />
+
+      <div class="max-w-6xl mx-auto mt-16 flex flex-col gap-24">
+        <!-- Passion 1 : la musique -->
+        <div class="grid md:grid-cols-[310px_1fr] gap-12 md:gap-24 items-center">
+          <div class="cadre-photo w-64 md:w-full mx-auto aspect-[310/435]">
+            <Coins petit />
+            <img src="/images/passion-musique.webp" alt="Le groupe ORION en concert" loading="lazy">
+          </div>
+          <div class="flex flex-col gap-5">
+            <h3 class="font-titre font-bold text-3xl tracking-wide"><span class="text-ocre">Musique</span> — Bassiste en groupe</h3>
+            <p>Créé fin 2023, ORION est mon groupe de musique : j'en suis le bassiste et l'un des membres fondateurs. Nous avons joué lors d'événements comme des carnavals ou deux éditions du Motor'n co Festival. J'ai également participé à la création du logo et de la police d'écriture officielle du groupe.</p>
+            <p>À travers ce projet, j'ai développé des compétences comme l'écoute active, le travail en équipe, la gestion du stress en live et le sens de l'harmonie globale d'un projet.</p>
+          </div>
+        </div>
+
+        <!-- Passion 2 : le jeu de rôle (image à droite sur ordinateur) -->
+        <div class="grid md:grid-cols-[1fr_310px] gap-12 md:gap-24 items-center">
+          <div class="cadre-photo w-64 md:w-full mx-auto aspect-[310/435] md:order-last">
+            <Coins petit />
+            <img src="/images/passion-jdr.webp" alt="Affiche de l'association La Taverne Étudiante" loading="lazy">
+          </div>
+          <div class="flex flex-col gap-5">
+            <h3 class="font-titre font-bold text-3xl tracking-wide"><span class="text-ocre">Président d'association</span> — Jeu de rôle « La Taverne Étudiante »</h3>
+            <p>Créée en début d'année, cette association de jeu de rôle s'appuie sur les règles de Donjons et Dragons et sur un univers fait maison. Chaque semaine, des joueurs s'y retrouvent pour incarner leur personnage. En plus d'être l'un des membres fondateurs, je suis celui qui raconte l'histoire et improvise en fonction des actions des joueurs.</p>
+            <p>À travers ce projet, j'ai développé des compétences en organisation d'événements hebdomadaires et en storytelling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION IV : PLUS-VALUE & VALEUR AJOUTÉE ================= -->
+    <section class="bg-sable py-24 px-5">
+      <OrnementSection numero="IV" libelle="Utilité" />
+      <TitreSection motOr="Plus-value" suite=" & valeur ajoutée" sousTitre="Ce que j'apporte sur un projet" />
+      <div class="max-w-6xl mx-auto mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-9">
+        {plusValues.map((pv) => <CarteEtape {...pv} />)}
+      </div>
+    </section>
+  </main>
+</Layout>

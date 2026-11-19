@@ -1,0 +1,37 @@
+---
+// =====================================================
+// CARTE PROJET
+// Toutes les cartes ont la même structure et la même hauteur.
+// Le visuel a un filtre sépia qui disparaît au survol (voir FILTRE SÉPIA dans global.css).
+// =====================================================
+import Coins from './Coins.astro'
+const { projet } = Astro.props
+const tags = (projet.tags || []).slice(0, 3)
+---
+<article class="carte-projet" data-categorie={projet.categorie}>
+  <div class="cadre">
+    <Coins petit />
+
+    <!-- Visuel + bandeau de catégorie (les losanges du bandeau sont dessinés en CSS) -->
+    <div class="visuel">
+      <img src={projet.image} alt={`Visuel du projet ${projet.titre}`} class="filtre-sepia" loading="lazy">
+      <span class="bandeau-categorie">{projet.categorie}</span>
+    </div>
+
+    <!-- Textes de la carte -->
+    <div class="flex flex-col items-center gap-3.5 p-6 flex-1">
+      <h3 class="titre">{projet.titre}</h3>
+      <p class="italic text-ocre text-center text-base">{projet.role}</p>
+      <div class="ornement-petit"><span></span></div>
+      <p class="description">{projet.description}</p>
+      <ul class="flex flex-wrap justify-center gap-1.5 mt-auto">
+        {tags.map((tag) => <li class="tag">{tag}</li>)}
+      </ul>
+      <div class="w-full h-px bg-or/60"></div>
+      <a href={`/projets/${projet.slug}/`} class="font-titre font-bold text-sm tracking-[0.1em] text-brun hover:text-ocre">
+        VOIR LE PROJET <span aria-hidden="true">→</span>
+        <span class="sr-only">{projet.titre}</span>
+      </a>
+    </div>
+  </div>
+</article>

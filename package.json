@@ -1,0 +1,23 @@
+{
+  "name": "portfolio-alexandre-guillet",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio d'Alexandre Guillet – BUT MMI 2, parcours Communication",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "importer-projets": "node pocketbase/importer-projets.js"
+  },
+  "dependencies": {
+    "@fontsource/cinzel": "^5.0.0",
+    "@fontsource/cinzel-decorative": "^5.0.0",
+    "@fontsource/crimson-text": "^5.0.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.0.0",
+    "daisyui": "^5.0.0",
+    "pocketbase": "^0.26.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

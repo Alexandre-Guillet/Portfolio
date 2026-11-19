@@ -1,0 +1,72 @@
+---
+// =====================================================
+// PAGE D'ACCUEIL
+// Héros · À propos · Projets sélectionnés · Formulaire de contact
+// =====================================================
+import Layout from '../layouts/Layout.astro'
+import Heros from '../components/Heros.astro'
+import OrnementSection from '../components/OrnementSection.astro'
+import TitreSection from '../components/TitreSection.astro'
+import Coins from '../components/Coins.astro'
+import CarteProjet from '../components/CarteProjet.astro'
+import FormulaireContact from '../components/FormulaireContact.astro'
+import { recupererProjets } from '../lib/pocketbase.js'
+
+// PROJETS SÉLECTIONNÉS : ceux dont la case « mis_en_avant » est cochée (3 maximum)
+const projets = await recupererProjets()
+const selection = projets.filter((projet) => projet.mis_en_avant).slice(0, 3)
+---
+<Layout
+  titre="Alexandre Guillet — Portfolio | BUT MMI Communication"
+  description="Portfolio d'Alexandre Guillet, étudiant en BUT MMI à Montbéliard : design UX/UI, création visuelle et stratégie de communication."
+>
+  <Heros ligne1="ALEXANDRE" ligne2="GUILLET" sousTitre="Étudiant en 2e année de BUT MMI<br>Communication, Design UX/UI &amp; Création numérique" />
+
+  <main id="contenu">
+    <!-- ================= SECTION I : À PROPOS DE MOI ================= -->
+    <section class="bg-parchemin py-24 px-5">
+      <OrnementSection numero="I" libelle="Moi" />
+      <TitreSection motOr="À propos" suite=" de moi" />
+
+      <div class="max-w-5xl mx-auto mt-16 grid md:grid-cols-[310px_1fr] gap-12 md:gap-24 items-center">
+        <div class="cadre-photo w-64 md:w-full mx-auto aspect-[310/435]">
+          <Coins petit />
+          <img src="/images/portrait.webp" alt="Portrait d'Alexandre Guillet">
+        </div>
+        <div class="flex flex-col gap-6 text-2xl">
+          <p>Étudiant en 2e année de BUT MMI, je touche un peu à tout, mais ce qui me plaît le plus, c'est le design d'interface et la création visuelle.</p>
+          <p>Passionné par la musique et les arts, je cherche un stage où je pourrai appliquer ce que j'apprends et aider à faire rayonner de beaux projets.</p>
+          <a href="/a-propos/" class="btn btn-primary border-ocre self-start font-texte font-bold text-lg tracking-[0.1em] mt-4 px-8">EN SAVOIR PLUS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION II : PROJETS SÉLECTIONNÉS ================= -->
+    <section class="bg-sable p-4 md:p-12">
+      <!-- CADRE ENLUMINÉ : double filet doré + losanges dans les coins -->
+      <div class="cadre-enlumine">
+        <Coins />
+        <div class="cadre-interieur py-16 md:py-20 px-4 md:px-16">
+          <OrnementSection numero="II" libelle="Projets" />
+          <TitreSection motOr="Projets" suite=" sélectionnés" sousTitre="Une sélection de travaux menés au fil de mon cursus" />
+          <p class="max-w-3xl mx-auto text-center mt-5">Chaque projet mêle communication, design et développement. Voici ceux qui me représentent le mieux : ouvrez une carte pour découvrir la démarche, les choix réalisés et le résultat.</p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 max-w-6xl mx-auto mt-14">
+            {selection.map((projet) => <CarteProjet projet={projet} />)}
+          </div>
+
+          <div class="text-center mt-14">
+            <a href="/projets/" class="btn btn-primary border-ocre font-texte font-bold text-lg tracking-[0.1em] px-9">VOIR TOUS MES PROJETS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION III : FORMULAIRE DE CONTACT ================= -->
+    <section id="contact" class="bg-parchemin py-24 px-5 scroll-mt-20">
+      <OrnementSection numero="III" libelle="Contact" />
+      <TitreSection motOr="Envoyer" suite=" un message" />
+      <FormulaireContact />
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,59 @@
+[
+  {
+    "name": "projets",
+    "type": "base",
+    "listRule": "",
+    "viewRule": "",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "fields": [
+      { "name": "titre", "type": "text", "required": true },
+      { "name": "slug", "type": "text", "required": true, "pattern": "^[a-z0-9-]+$" },
+      { "name": "role", "type": "text" },
+      { "name": "categorie", "type": "select", "required": true, "maxSelect": 1, "values": ["Communication", "Design UX/UI", "Développement", "Projet perso"] },
+      { "name": "description", "type": "text" },
+      { "name": "image", "type": "file", "maxSelect": 1, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
+      { "name": "tags", "type": "json", "maxSize": 2000000 },
+      { "name": "mis_en_avant", "type": "bool" },
+      { "name": "ordre", "type": "number" },
+
+      { "name": "sous_titre", "type": "text" },
+      { "name": "accroche", "type": "json", "maxSize": 2000000 },
+      { "name": "problematique", "type": "text" },
+      { "name": "objectif", "type": "text" },
+      { "name": "contexte", "type": "json", "maxSize": 2000000 },
+      { "name": "fiche", "type": "json", "maxSize": 2000000 },
+      { "name": "image_principale", "type": "file", "maxSelect": 1, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
+      { "name": "intro_recherche", "type": "text" },
+      { "name": "etapes", "type": "json", "maxSize": 2000000 },
+      { "name": "realisations", "type": "json", "maxSize": 2000000 },
+      { "name": "galerie", "type": "json", "maxSize": 2000000 },
+      { "name": "images", "type": "file", "maxSelect": 20, "maxSize": 5242880, "mimeTypes": ["image/jpeg", "image/png", "image/webp", "image/svg+xml"] },
+      { "name": "outils", "type": "json", "maxSize": 2000000 },
+      { "name": "chiffres", "type": "json", "maxSize": 2000000 },
+      { "name": "bilan", "type": "text" },
+      { "name": "liens", "type": "json", "maxSize": 2000000 },
+
+      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false },
+      { "name": "updated", "type": "autodate", "onCreate": true, "onUpdate": true }
+    ],
+    "indexes": ["CREATE UNIQUE INDEX idx_projets_slug ON projets (slug)"]
+  },
+  {
+    "name": "messages",
+    "type": "base",
+    "listRule": null,
+    "viewRule": null,
+    "createRule": "",
+    "updateRule": null,
+    "deleteRule": null,
+    "fields": [
+      { "name": "nom", "type": "text", "required": true },
+      { "name": "email", "type": "email", "required": true },
+      { "name": "message", "type": "text", "required": true },
+      { "name": "created", "type": "autodate", "onCreate": true, "onUpdate": false }
+    ],
+    "indexes": []
+  }
+]

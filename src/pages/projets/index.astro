@@ -1,0 +1,83 @@
+---
+// =====================================================
+// PAGE MES PROJETS
+// Toutes les cartes sont générées depuis PocketBase au moment du build.
+// Les filtres par catégorie sont gérés par le script en bas de page.
+// =====================================================
+import Layout from '../../layouts/Layout.astro'
+import Heros from '../../components/Heros.astro'
+import OrnementSection from '../../components/OrnementSection.astro'
+import TitreSection from '../../components/TitreSection.astro'
+import Coins from '../../components/Coins.astro'
+import CarteProjet from '../../components/CarteProjet.astro'
+import { recupererProjets } from '../../lib/pocketbase.js'
+
+const projets = await recupererProjets()
+const categories = ['Tous', 'Communication', 'Design UX/UI', 'Développement', 'Projet perso']
+---
+<Layout titre="Mes projets — Alexandre Guillet" description="Tous les projets d'Alexandre Guillet : communication, design UX/UI et développement web.">
+  <Heros ligne1="MES" ligne2="PROJETS" sousTitre="Voici tous les projets que j'ai pu réaliser au cours de mon cursus" />
+
+  <main id="contenu">
+    <section class="bg-sable p-4 md:p-12">
+      <div class="cadre-enlumine">
+        <Coins />
+        <div class="cadre-interieur py-16 md:py-20 px-4 md:px-16">
+          <OrnementSection numero="I" libelle="Portfolio" />
+          <TitreSection motOr="Mes" suite=" projets" sousTitre="Communication, design et développement : tous mes travaux réunis au même endroit" />
+
+          <!-- BARRE DE FILTRES -->
+          <div class="flex flex-wrap justify-center items-center gap-3.5 mt-12" role="group" aria-label="Filtrer les projets par catégorie">
+            <span class="flex items-center gap-2.5 italic text-xl mr-2"><img src="/ornements/losange.svg" alt="" class="w-2 h-2">Filtrer par :</span>
+            {categories.map((c) => (
+              <button
+                type="button"
+                class:list={['bouton-filtre btn font-titre font-bold tracking-[0.08em]', c === 'Tous' ? 'btn-primary' : 'btn-outline border-or text-brun']}
+                data-categorie={c}
+                aria-pressed={c === 'Tous' ? 'true' : 'false'}
+              >{c}</button>
+            ))}
+          </div>
+          <p id="compteur-projets" class="text-center italic text-taupe mt-4" aria-live="polite">{projets.length} projets</p>
+
+          <!-- GRILLE DES CARTES : un nouveau projet ajouté dans PocketBase apparaît ici au prochain build -->
+          <div id="grille-projets" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 max-w-6xl mx-auto mt-12">
+            {projets.map((projet) => <CarteProjet projet={projet} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // FILTRES PAR CATÉGORIE : on cache les cartes qui ne correspondent pas
+  const boutons = document.querySelectorAll('.bouton-filtre')
+  const cartes = document.querySelectorAll('#grille-projets .carte-projet')
+  const compteur = document.querySelector('#compteur-projets')
+
+  boutons.forEach((bouton) => {
+    bouton.addEventListener('click', () => {
+      const categorie = bouton.dataset.categorie
+
+      // Le bouton cliqué devient « actif » (fond brun), les autres non (contour doré)
+      boutons.forEach((b) => {
+        b.classList.remove('btn-primary')
+        b.classList.add('btn-outline', 'border-or', 'text-brun')
+        b.setAttribute('aria-pressed', 'false')
+      })
+      bouton.classList.remove('btn-outline', 'border-or', 'text-brun')
+      bouton.classList.add('btn-primary')
+      bouton.setAttribute('aria-pressed', 'true')
+
+      // On affiche ou on cache chaque carte (attribut "hidden")
+      let visibles = 0
+      cartes.forEach((carte) => {
+        const afficher = categorie === 'Tous' || carte.dataset.categorie === categorie
+        carte.hidden = !afficher
+        if (afficher) visibles++
+      })
+      compteur.textContent = visibles + (visibles > 1 ? ' projets' : ' projet')
+    })
+  })
+</script>

@@ -1,0 +1,62 @@
+---
+// =====================================================
+// PIED DE PAGE (FOOTER)
+// Présentation à gauche, puis 3 colonnes de liens alignées
+// =====================================================
+import OrnementLigne from './OrnementLigne.astro'
+const annee = new Date().getFullYear()
+---
+<footer class="bg-nuit text-parchemin pt-12 pb-8 px-5">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex justify-center">
+      <OrnementLigne classe="w-full max-w-5xl" />
+    </div>
+
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.4fr] mt-12 items-start">
+      <!-- Présentation -->
+      <div class="flex flex-col gap-3.5">
+        <p class="font-titre font-bold text-3xl tracking-[0.08em]">ALEXANDRE GUILLET</p>
+        <p class="italic text-or">Étudiant en 2e année de BUT MMI · parcours Communication</p>
+        <p class="text-sable text-lg max-w-md">Design UX/UI, création visuelle et stratégie de communication. Actuellement à la recherche d'un stage pour mettre ces compétences au service de beaux projets.</p>
+        <a href="/#contact" class="btn btn-outline border-or text-parchemin self-start font-titre tracking-[0.12em] mt-1 hover:bg-or hover:text-nuit">ME CONTACTER</a>
+      </div>
+
+      <div class="grid gap-10 sm:grid-cols-3 items-start">
+        <div>
+          <p class="titre-colonne">NAVIGATION</p>
+          <ul class="flex flex-col gap-3">
+            <li><a href="/" class="hover:text-or">Accueil</a></li>
+            <li><a href="/a-propos/" class="hover:text-or">À propos</a></li>
+            <li><a href="/projets/" class="hover:text-or">Mes projets</a></li>
+            <li><a href="/#contact" class="hover:text-or">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="titre-colonne">CONTACT</p>
+          <ul class="flex flex-col gap-3">
+            <li><a href="mailto:alexandreguillet45@gmail.com" class="hover:text-or break-all">alexandreguillet45@gmail.com</a></li>
+            <li>Université Marie et Louis Pasteur</li>
+            <li>IUT de Montbéliard (25)</li>
+          </ul>
+        </div>
+
+        <!-- RETROUVEZ-MOI : remplace les « # » par tes vrais liens -->
+        <div>
+          <p class="titre-colonne">RETROUVEZ-MOI</p>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#" class="hover:text-or" target="_blank" rel="noopener">LinkedIn →</a></li>
+            <li><a href="#" class="hover:text-or" target="_blank" rel="noopener">GitHub →</a></li>
+            <li><a href="/cv-alexandre-guillet.pdf" class="hover:text-or" download>Mon CV (PDF) ↓</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bas de page -->
+    <div class="border-t border-or/35 mt-12 pt-6 flex flex-col md:flex-row justify-between gap-3 italic text-gris-chaud text-base">
+      <p>© {annee} Alexandre Guillet — Portfolio réalisé dans le cadre du BUT MMI</p>
+      <p><a href="/mentions-legales/" class="hover:text-or">Mentions légales</a> · <a href="#" class="hover:text-or">Retour en haut ↑</a></p>
+    </div>
+  </div>
+</footer>

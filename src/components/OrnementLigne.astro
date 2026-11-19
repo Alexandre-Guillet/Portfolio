@@ -1,0 +1,13 @@
+---
+// =====================================================
+// LIGNE ORNÉE : filets + rinceaux + fleur au centre (héros, footer)
+// =====================================================
+const { classe = 'w-full max-w-4xl' } = Astro.props
+---
+<div class={`ornement-ligne ${classe}`} aria-hidden="true">
+  <img src="/ornements/filet-gauche.svg" alt="" class="filet">
+  <img src="/ornements/rinceau-gauche.svg" alt="" class="rinceau">
+  <img src="/ornements/fleur.svg" alt="" class="fleur">
+  <img src="/ornements/rinceau-droit.svg" alt="" class="rinceau">
+  <img src="/ornements/filet-droit.svg" alt="" class="filet">
+</div>

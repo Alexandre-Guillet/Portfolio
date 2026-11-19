@@ -1,0 +1,15 @@
+---
+// =====================================================
+// IMAGE ENCADRÉE : cadre doré + losanges dans les coins + légende
+// "format" = classe Tailwind de proportions (ex : "aspect-[10/7]")
+// =====================================================
+import Coins from './Coins.astro'
+const { src, alt, legende = '', format = '', sepia = false } = Astro.props
+---
+<figure class="flex flex-col gap-3">
+  <div class={`cadre-photo ${format}`}>
+    <Coins petit />
+    <img src={src} alt={alt} loading="lazy" class={sepia ? 'filtre-sepia' : ''}>
+  </div>
+  {legende && <figcaption class="italic text-taupe text-center text-base">{legende}</figcaption>}
+</figure>

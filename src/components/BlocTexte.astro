@@ -1,0 +1,14 @@
+---
+// =====================================================
+// BLOC DE TEXTE : sur-titre doré + titre (1re lettre en ocre) + paragraphe
+// =====================================================
+import SurTitre from './SurTitre.astro'
+const { surtitre, titre, texte } = Astro.props
+---
+<div class="flex flex-col gap-3">
+  {surtitre && <SurTitre texte={surtitre} />}
+  <h3 class="font-titre font-bold text-3xl tracking-wide">
+    <span class="text-ocre">{titre.charAt(0)}</span>{titre.slice(1)}
+  </h3>
+  <p>{texte}</p>
+</div>

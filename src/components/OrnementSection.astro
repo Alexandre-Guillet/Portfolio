@@ -1,0 +1,17 @@
+---
+// =====================================================
+// ORNEMENT DE SECTION : chiffre romain + filets + rinceaux + libellé
+// Utilisation : <OrnementSection numero="II" libelle="Projets" />
+// =====================================================
+const { numero, libelle } = Astro.props
+---
+<div class="ornement-section">
+  <span class="ornement-numero">{numero}</span>
+  <div class="ornement-ligne">
+    <img src="/ornements/filet-gauche.svg" alt="" class="filet">
+    <img src="/ornements/rinceau-gauche.svg" alt="" class="rinceau">
+    <span class="ornement-libelle">{libelle}</span>
+    <img src="/ornements/rinceau-droit.svg" alt="" class="rinceau">
+    <img src="/ornements/filet-droit.svg" alt="" class="filet">
+  </div>
+</div>

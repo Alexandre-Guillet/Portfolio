@@ -1,0 +1,18 @@
+---
+// =====================================================
+// CARTE ÉTAPE / PLUS-VALUE : sceau en losange + titre + sous-titre + texte
+// Utilisée pour les cartes « plus-value » (À propos) et les étapes de recherche (projets)
+// =====================================================
+import Coins from './Coins.astro'
+const { numero, titre, origine, texte } = Astro.props
+---
+<article class="bg-parchemin border border-or-fonce p-2 shadow-lg">
+  <div class="relative border border-or h-full flex flex-col items-center text-center gap-3.5 px-6 pt-8 pb-7">
+    <Coins petit />
+    <div class="sceau-losange"><span>{numero}</span></div>
+    <h3 class="font-titre font-bold text-xl tracking-wide min-h-[3.2rem] flex items-center">{titre}</h3>
+    <p class="italic text-ocre">{origine}</p>
+    <div class="ornement-petit"><span></span></div>
+    <p class="text-base leading-relaxed">{texte}</p>
+  </div>
+</article>

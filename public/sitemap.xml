@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plan du site pour les moteurs de recherche (à compléter si j'ajoute des projets) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://portfolio.alexandreguillet.fr/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/a-propos/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/projets/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/projets/mocktail-wave/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/projets/effacees-de-la-science/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/projets/red-panda-studio/</loc></url>
+  <url><loc>https://portfolio.alexandreguillet.fr/mentions-legales/</loc></url>
+</urlset>

@@ -1,0 +1,64 @@
+---
+// =====================================================
+// MENTIONS LÉGALES
+// Les passages entre [crochets] sont à compléter.
+// =====================================================
+import Layout from '../layouts/Layout.astro'
+import OrnementSection from '../components/OrnementSection.astro'
+import TitreSection from '../components/TitreSection.astro'
+---
+<Layout titre="Mentions légales — Alexandre Guillet" description="Mentions légales du portfolio d'Alexandre Guillet.">
+  <main id="contenu" class="bg-parchemin py-24 px-5">
+    <OrnementSection numero="§" libelle="Informations" />
+    <TitreSection motOr="Mentions" suite=" légales" />
+    <p class="text-center italic text-taupe mt-3">Dernière mise à jour : [date]</p>
+    <div class="max-w-3xl mx-auto mt-14 flex flex-col gap-10">
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">É</span>diteur du site</h3>
+        <p>Le site <strong>portfolio.alexandreguillet.fr</strong> est édité à titre personnel et non commercial par Alexandre Guillet, étudiant en BUT Métiers du Multimédia et de l'Internet (MMI) à l'IUT de Montbéliard, Université Marie et Louis Pasteur.</p>
+        <p class="mt-2">Contact : alexandreguillet45@gmail.com (<a href="mailto:alexandreguillet45@gmail.com" class="underline">écrire un email</a>)<br>Directeur de la publication : Alexandre Guillet.</p>
+        <p class="mt-2 italic text-taupe text-base">Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN), un particulier qui édite un site non professionnel peut ne pas publier son adresse postale, à condition de la communiquer à son hébergeur.</p>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">H</span>ébergement</h3>
+        <p><strong>Site :</strong> [Nom de l'hébergeur] — [adresse postale] — [téléphone ou site web].<br>
+        <strong>Base de données (PocketBase) :</strong> [Nom de l'hébergeur] — [adresse postale] — [site web].</p>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">P</span>ropriété intellectuelle</h3>
+        <p>Les textes, la direction artistique, les ornements et le code du site sont la création d'Alexandre Guillet, sauf mention contraire. Toute reproduction sans autorisation est interdite.</p>
+        <p class="mt-2">Les projets réalisés en équipe sont présentés avec le nom de leurs co-auteurs : Mocktail Wave et Red Panda Studio ont été réalisés avec Telmane Sarkissian et Maël Brungard. Les marques, logos et visuels de ces projets restent la propriété de leurs auteurs.</p>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">C</span>rédits</h3>
+        <ul class="list-disc pl-6 flex flex-col gap-1.5">
+          <li>Polices : Cinzel, Cinzel Decorative et Crimson Text — licence SIL Open Font License, hébergées sur ce site.</li>
+          <li>Photo de Notre-Dame de Paris : [auteur], [source], [licence] — à compléter.</li>
+          <li>Portrait d'Alexandre Guillet : [photographe] — à compléter.</li>
+          <li>Nuages dessinés de l'en-tête : [source], [licence] — à compléter.</li>
+          <li>Développement : HTML, Tailwind CSS, DaisyUI, JavaScript, PocketBase, Vite.</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">D</span>onnées personnelles (RGPD)</h3>
+        <p>Le formulaire de contact collecte votre nom, votre adresse email et votre message.</p>
+        <ul class="list-disc pl-6 flex flex-col gap-1.5 mt-2">
+          <li><strong>Finalité :</strong> uniquement vous répondre.</li>
+          <li><strong>Base légale :</strong> votre consentement, donné en envoyant le formulaire.</li>
+          <li><strong>Destinataire :</strong> Alexandre Guillet, seul. Les données ne sont ni vendues ni transmises.</li>
+          <li><strong>Stockage :</strong> dans la base PocketBase du site, chez l'hébergeur indiqué plus haut.</li>
+          <li><strong>Durée de conservation :</strong> 12 mois maximum après le dernier échange, puis suppression.</li>
+          <li><strong>Vos droits :</strong> accès, rectification, suppression et opposition, en écrivant à alexandreguillet45@gmail.com. Vous pouvez aussi adresser une réclamation à la CNIL (cnil.fr).</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">C</span>ookies et mesure d'audience</h3>
+        <p>Ce site ne dépose aucun cookie, n'utilise aucun outil de mesure d'audience et ne charge aucune ressource externe (les polices sont hébergées avec le site). Aucun bandeau de consentement n'est donc nécessaire.</p>
+      </section>
+      <section>
+        <h3 class="font-titre font-bold text-2xl mb-3"><span class="text-ocre">A</span>ccessibilité</h3>
+        <p>Le site a été conçu en suivant les recommandations du RGAA (contrastes, textes alternatifs, navigation au clavier, lien d'évitement). Si vous rencontrez une difficulté, écrivez-moi : je corrigerai le problème.</p>
+      </section>
+    </div>
+  </main>
+</Layout>

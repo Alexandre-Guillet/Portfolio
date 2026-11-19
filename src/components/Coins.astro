@@ -1,0 +1,12 @@
+---
+// =====================================================
+// COINS : les 4 petits losanges dorés posés dans les angles d'un cadre
+// Utilisation : <Coins /> ou <Coins petit /> (le parent doit être en "relative")
+// =====================================================
+const { petit = false } = Astro.props
+const taille = petit ? 'petit' : ''
+---
+<span class={`coin ${taille} coin-hg`}></span>
+<span class={`coin ${taille} coin-hd`}></span>
+<span class={`coin ${taille} coin-bg`}></span>
+<span class={`coin ${taille} coin-bd`}></span>

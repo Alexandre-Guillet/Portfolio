@@ -1,0 +1,9 @@
+---
+// =====================================================
+// TITRE DE SECTION (H2) : le premier mot est en ocre
+// Utilisation : <TitreSection motOr="Mes" suite=" projets" sousTitre="..." />
+// =====================================================
+const { motOr, suite, sousTitre } = Astro.props
+---
+<h2 class="titre-section mt-5"><span class="mot-or">{motOr}</span>{suite}</h2>
+{sousTitre && <p class="sous-titre mt-3">{sousTitre}</p>}

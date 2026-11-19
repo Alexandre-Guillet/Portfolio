@@ -1,0 +1,46 @@
+---
+// =====================================================
+// EN-TÊTE / MENU DE NAVIGATION
+// Le lien de la page en cours est mis en avant (aria-current="page")
+// =====================================================
+const page = Astro.url.pathname
+const liens = [
+  { href: '/a-propos/', texte: 'À propos' },
+  { href: '/projets/', texte: 'Mes projets' },
+  { href: '/#contact', texte: 'Contact' },
+]
+// Un lien est « actif » si l'adresse de la page commence par son href
+const estActif = (href) => href !== '/#contact' && page.startsWith(href)
+---
+<header class="sticky top-0 z-40 bg-parchemin/95 backdrop-blur border-b border-or/40">
+  <nav class="max-w-7xl mx-auto px-5 py-4 flex items-center" aria-label="Menu principal">
+    <!-- Logo : mon nom en Cinzel -->
+    <a href="/" class="font-titre font-bold text-lg md:text-2xl tracking-[0.08em]">ALEXANDRE GUILLET</a>
+
+    <!-- Menu ordinateur (caché sur mobile) -->
+    <ul class="hidden md:flex ml-auto gap-12 font-titre font-bold tracking-[0.1em] uppercase text-lg">
+      {liens.map((l) => (
+        <li><a href={l.href} class="lien-nav hover:text-ocre" aria-current={estActif(l.href) ? 'page' : undefined}>{l.texte}</a></li>
+      ))}
+    </ul>
+
+    <!-- MENU MOBILE : bouton « burger » qui ouvre une liste (composant dropdown de DaisyUI) -->
+    <details class="dropdown dropdown-end ml-auto md:hidden menu-mobile">
+      <summary class="btn btn-ghost px-2" aria-label="Ouvrir le menu">
+        <svg width="32" height="16" viewBox="0 0 32 16" aria-hidden="true"><path d="M4 1h28M12 8h20M7 15h25" stroke="#2F251E" stroke-width="1.5" /></svg>
+      </summary>
+      <ul class="menu dropdown-content bg-parchemin border border-or w-56 mt-3 p-3 font-titre font-bold tracking-widest uppercase shadow-lg">
+        {liens.map((l) => (
+          <li><a href={l.href} class="lien-nav" aria-current={estActif(l.href) ? 'page' : undefined}>{l.texte}</a></li>
+        ))}
+      </ul>
+    </details>
+  </nav>
+</header>
+
+<script>
+  // Referme le menu mobile quand on clique sur un lien
+  document.querySelectorAll('.menu-mobile a').forEach((lien) => {
+    lien.addEventListener('click', () => lien.closest('details')?.removeAttribute('open'))
+  })
+</script>
